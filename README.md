@@ -17,7 +17,7 @@ npm install @askbenny/widget
 <script src="https://unpkg.com/@askbenny/widget/dist/askbenny-widget.umd.min.js"></script>
 
 <!-- Your branded widget -->
-<askbenny agent-id="agent_01jym2zzfrecjrx53vhcn8kg8gqxp"></askbenny>
+<ask-benny agent-id="agent_01jym2zzfrecjrx53vhcn8kg8gqxp"></ask-benny>
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ Just include the script and use the custom element:
     <h1>Welcome to my website</h1>
     
     <!-- AskBenny Widget -->
-    <askbenny agent-id="your-elevenlabs-agent-id"></askbenny>
+    <ask-benny agent-id="your-elevenlabs-agent-id"></ask-benny>
     
     <!-- Load the script -->
     <script src="https://unpkg.com/@askbenny/widget"></script>
@@ -50,8 +50,8 @@ Just include the script and use the custom element:
 ```javascript
 import { AskBennyWidget } from '@askbenny/widget';
 
-// Widget automatically registers the <askbenny> custom element
-// Now you can use <askbenny agent-id="..."></askbenny> in your HTML
+// Widget automatically registers the <ask-benny> custom element
+// Now you can use <ask-benny agent-id="..."></ask-benny> in your HTML
 
 // Or create programmatically:
 const widget = AskBennyWidget.create('your-agent-id', document.getElementById('chat-container'));
@@ -76,7 +76,7 @@ function MyComponent() {
   return (
     <div>
       <h1>My App</h1>
-      <askbenny agent-id="your-agent-id" />
+      <ask-benny agent-id="your-agent-id" />
     </div>
   );
 }
@@ -87,7 +87,7 @@ function MyComponent() {
 <template>
   <div>
     <h1>My App</h1>
-    <askbenny agent-id="your-agent-id" />
+    <ask-benny agent-id="your-agent-id" />
   </div>
 </template>
 
@@ -102,7 +102,7 @@ import '@askbenny/widget';
 import '@askbenny/widget';
 
 // In your template
-<askbenny agent-id="your-agent-id"></askbenny>
+<ask-benny agent-id="your-agent-id"></ask-benny>
 ```
 
 ## API Reference
@@ -115,7 +115,7 @@ import '@askbenny/widget';
 
 #### Example
 ```html
-<askbenny agent-id="agent_01jym2zzfrecjr53vdhcn8kg8gqsp"></askbenny>
+<ask-benny agent-id="agent_01jym2zzfrecjr53vdhcn8kg8gqsp"></ask-benny>
 ```
 
 ### JavaScript API
@@ -148,7 +148,7 @@ if (AskBennyWidget.isElevenLabsLoaded()) {
 
 ## How It Works
 
-1. **Your branded tag**: Use `<askbenny agent-id="...">` in your HTML
+1. **Your branded tag**: Use `<ask-benny agent-id="...">` in your HTML
 2. **Automatic wrapping**: The widget creates an `<elevenlabs-convai>` element inside itself
 3. **Script loading**: ElevenLabs' official script is loaded once per page
 4. **Seamless integration**: The ElevenLabs widget functions exactly as intended
@@ -160,8 +160,8 @@ if (AskBennyWidget.isElevenLabsLoaded()) {
 You can have multiple widgets on the same page:
 
 ```html
-<askbenny agent-id="sales-agent"></askbenny>
-<askbenny agent-id="support-agent"></askbenny>
+<ask-benny agent-id="sales-agent"></ask-benny>
+<ask-benny agent-id="support-agent"></ask-benny>
 ```
 
 The ElevenLabs script is loaded only once, regardless of how many widgets you have.
@@ -169,7 +169,7 @@ The ElevenLabs script is loaded only once, regardless of how many widgets you ha
 ### Dynamic Agent Switching
 
 ```javascript
-const widget = document.querySelector('askbenny');
+const widget = document.querySelector('ask-benny');
 widget.setAttribute('agent-id', 'new-agent-id');
 // Widget automatically updates to use the new agent
 ```

@@ -104,7 +104,7 @@
                 &lt;script src="https://unpkg.com/@askbenny/widget"&gt;&lt;/script&gt;
 
                 &lt;!-- Use the widget --&gt;
-                &lt;askbenny agent-id="your-agent-id"&gt;&lt;/askbenny&gt;
+                &lt;ask-benny agent-id="your-agent-id"&gt;&lt;/ask-benny&gt;
             </div>
         </div>
 
@@ -192,7 +192,7 @@
             const container = document.getElementById('widget-demo-area');
             container.innerHTML = '';
 
-            const widget = document.createElement('askbenny');
+            const widget = document.createElement('ask-benny');
             widget.setAttribute('agent-id', agentId);
             container.appendChild(widget);
 
@@ -238,13 +238,13 @@
             container.innerHTML = '';
 
             // Create first widget
-            const widget1 = document.createElement('askbenny');
+            const widget1 = document.createElement('ask-benny');
             widget1.setAttribute('agent-id', agent1);
             widget1.style.margin = '10px';
             widget1.style.display = 'inline-block';
 
             // Create second widget
-            const widget2 = document.createElement('askbenny');
+            const widget2 = document.createElement('ask-benny');
             widget2.setAttribute('agent-id', agent2);
             widget2.style.margin = '10px';
             widget2.style.display = 'inline-block';
