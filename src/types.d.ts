@@ -47,6 +47,16 @@ export declare class AskBennyWidget extends HTMLElement {
   loadElevenLabsScript(): Promise<void>;
 
   /**
+   * Removes the ElevenLabs branding overlay from the widget
+   */
+  removeElevenLabsBranding(convaiElement: HTMLElement): void;
+
+  /**
+   * Replaces ElevenLabs branding with AskBenny branding
+   */
+  replaceWithAskBennyBranding(convaiElement: HTMLElement): void;
+
+  /**
    * Creates a new AskBenny widget element programmatically
    * @param agentId - The ElevenLabs agent ID
    * @param container - The container to append the widget to (defaults to document.body)
@@ -74,6 +84,7 @@ declare global {
         HTMLElement
       > & {
         "agent-id": string;
+        "hide-branding"?: boolean | string;
       };
     }
   }
