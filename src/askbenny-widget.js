@@ -409,12 +409,9 @@ class AskBennyWidget extends HTMLElement {
 
   replaceOverlayContent(overlayElement) {
     // Create new AskBenny branding content
-    overlayElement.innerHTML = `
-      <p class="whitespace-nowrap [line-height:var(--el-overlay-padding)] text-[10px] px-3 translate-y-[calc(var(--el-overlay-padding)-1rem)]">
-        <span class="opacity-30">Powered by</span> 
-        <a href="https://askbenny.ca" target="_blank" class="underline cursor-pointer pointer-events-auto focus-visible:outline-none opacity-30 hover:opacity-50 focus-visible:opacity-100 focus-visible:underline-offset-2">askbenny.ca</a>
-      </p>
-    `;
+    overlayElement.innerHTML = `<div class="overlay !flex transition-opacity duration-200 data-hidden:opacity-0 flex-col justify-end items-end" style="display: none;">
+    <p class="whitespace-nowrap [line-height:var(--el-overlay-padding)] text-[10px] px-3 translate-y-[calc(var(--el-overlay-padding))]"><span class="opacity-30">Powered by</span> <a href="https://askbenny.ca" target="_blank" class="underline cursor-pointer pointer-events-auto focus-visible:outline-none opacity-30 hover:opacity-50 focus-visible:opacity-100 focus-visible:underline-offset-2">askbenny.ca</a></p>
+    </div>`;
   }
 
   // Public API methods
