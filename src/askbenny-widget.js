@@ -49,7 +49,13 @@ class AskBennyWidget extends HTMLElement {
   }
 
   connectedCallback() {
+    console.log("AskBenny: connectedCallback called");
     const agentId = this.getAttribute("agent-id") || "";
+    console.log("AskBenny: agent-id found:", agentId);
+    console.log(
+      "AskBenny: All attributes:",
+      Array.from(this.attributes).map((attr) => `${attr.name}="${attr.value}"`)
+    );
 
     if (!agentId) {
       console.warn("AskBenny Widget: agent-id attribute is required");
@@ -82,6 +88,7 @@ class AskBennyWidget extends HTMLElement {
   }
 
   async loadElevenLabsWidget() {
+    console.log("AskBenny: loadElevenLabsWidget called");
     const agentId = this.getAttribute("agent-id");
     if (!agentId) return;
 
@@ -100,13 +107,21 @@ class AskBennyWidget extends HTMLElement {
     this.addBrandingHideStyles();
 
     // Copy all supported attributes from askbenny to elevenlabs-convai
+    console.log("AskBenny: Starting attribute copy...");
+    let attributeCount = 0;
     CustomAttributeList.forEach((attrName) => {
       const attrValue = this.getAttribute(attrName);
       if (attrValue !== null) {
         console.log("AskBenny: Setting attribute", attrName, attrValue);
         convai.setAttribute(attrName, attrValue);
+        attributeCount++;
       }
     });
+    console.log(
+      "AskBenny: Copied",
+      attributeCount,
+      "attributes to elevenlabs-convai"
+    );
 
     this.appendChild(convai);
 
@@ -352,7 +367,13 @@ if (
   window.customElements &&
   !window.customElements.get("ask-benny")
 ) {
+  console.log("AskBenny: Registering custom element 'ask-benny'");
   window.customElements.define("ask-benny", AskBennyWidget);
+} else if (
+  typeof window !== "undefined" &&
+  window.customElements.get("ask-benny")
+) {
+  console.log("AskBenny: Custom element 'ask-benny' already registered");
 }
 
 // Export for module usage
