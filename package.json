@@ -1,0 +1,44 @@
+{
+  "name": "@askbenny/widget",
+  "version": "1.0.0",
+  "description": "A custom wrapper for ElevenLabs ConvAI widget that provides a branded embed experience",
+  "type": "module",
+  "main": "dist/askbenny-widget.js",
+  "module": "dist/askbenny-widget.esm.js",
+  "browser": "dist/askbenny-widget.umd.js",
+  "unpkg": "dist/askbenny-widget.umd.js",
+  "jsdelivr": "dist/askbenny-widget.umd.js",
+  "types": "dist/types.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "elevenlabs",
+    "convai",
+    "widget",
+    "embed",
+    "askbenny",
+    "voice",
+    "ai"
+  ],
+  "author": "AskBenny",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/askbenny/widget.git"
+  },
+  "homepage": "https://github.com/askbenny/widget#readme",
+  "bugs": {
+    "url": "https://github.com/askbenny/widget/issues"
+  }
+}
