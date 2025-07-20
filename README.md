@@ -221,5 +221,5 @@ MIT
 ## Support
 
 For issues and questions:
-- GitHub Issues: [Report a bug](https://github.com/your-org/askbenny-widget/issues)
+- GitHub Issues: [Report a bug](https://github.com/askbenny/widget/issues)
 - ElevenLabs Documentation: [ConvAI Widget Docs](https://elevenlabs.io/docs)
