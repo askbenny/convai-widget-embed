@@ -103,6 +103,7 @@ class AskBennyWidget extends HTMLElement {
     CustomAttributeList.forEach((attrName) => {
       const attrValue = this.getAttribute(attrName);
       if (attrValue !== null) {
+        console.log("AskBenny: Setting attribute", attrName, attrValue);
         convai.setAttribute(attrName, attrValue);
       }
     });
@@ -123,8 +124,12 @@ class AskBennyWidget extends HTMLElement {
 
   loadElevenLabsScript() {
     return new Promise((resolve, reject) => {
-      // Check if already loaded
-      if (window.__EL_CONVAI_LOADED__ || this.isElevenLabsLoaded) {
+      // Check if already loaded/registered
+      if (
+        window.__EL_CONVAI_LOADED__ ||
+        this.isElevenLabsLoaded ||
+        window.customElements.get("elevenlabs-convai")
+      ) {
         resolve();
         return;
       }
@@ -133,7 +138,11 @@ class AskBennyWidget extends HTMLElement {
       if (this.isElevenLabsLoading) {
         // Wait for the existing load to complete
         const checkLoaded = () => {
-          if (window.__EL_CONVAI_LOADED__ || this.isElevenLabsLoaded) {
+          if (
+            window.__EL_CONVAI_LOADED__ ||
+            this.isElevenLabsLoaded ||
+            window.customElements.get("elevenlabs-convai")
+          ) {
             resolve();
           } else {
             setTimeout(checkLoaded, 100);
