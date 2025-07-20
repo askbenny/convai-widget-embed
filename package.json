@@ -1,6 +1,6 @@
 {
   "name": "@askbenny/widget",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A custom wrapper for ElevenLabs ConvAI widget that provides a branded embed experience",
   "type": "module",
   "main": "dist/askbenny-widget.js",
