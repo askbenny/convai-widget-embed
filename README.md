@@ -112,20 +112,10 @@ import '@askbenny/widget';
 #### Attributes
 
 - `agent-id` (required): Your ElevenLabs ConvAI agent ID
-- `hide-branding` (optional): Boolean to control branding display
-  - `false` (default): Shows "Powered by askbenny.ca" 
-  - `true`: Completely removes branding
 
-#### Examples
+#### Example
 ```html
-<!-- Default: Shows AskBenny branding -->
 <ask-benny agent-id="agent_01jym2zzfrecjr53vdhcn8kg8gqsp"></ask-benny>
-
-<!-- Explicitly show AskBenny branding -->
-<ask-benny agent-id="agent_01jym2zzfrecjr53vdhcn8kg8gqsp" hide-branding="false"></ask-benny>
-
-<!-- Hide all branding -->
-<ask-benny agent-id="agent_01jym2zzfrecjr53vdhcn8kg8gqsp" hide-branding="true"></ask-benny>
 ```
 
 ### JavaScript API
@@ -161,36 +151,7 @@ if (AskBennyWidget.isElevenLabsLoaded()) {
 1. **Your branded tag**: Use `<ask-benny agent-id="...">` in your HTML
 2. **Automatic wrapping**: The widget creates an `<elevenlabs-convai>` element inside itself
 3. **Script loading**: ElevenLabs' official script is loaded once per page
-4. **Branding control**: Automatically replaces ElevenLabs branding with AskBenny branding, or hides it completely
-5. **Seamless integration**: The ElevenLabs widget functions exactly as intended
-
-## Branding Options
-
-The widget provides flexible branding control:
-
-### Default Behavior
-By default, the widget replaces "Powered by ElevenLabs" with "Powered by askbenny.ca":
-```html
-<ask-benny agent-id="your-agent-id"></ask-benny>
-```
-
-### Hide All Branding
-To remove branding completely:
-```html
-<ask-benny agent-id="your-agent-id" hide-branding="true"></ask-benny>
-```
-
-### Dynamic Branding Control
-You can change branding settings dynamically:
-```javascript
-const widget = document.querySelector('ask-benny');
-
-// Show AskBenny branding
-widget.setAttribute('hide-branding', 'false');
-
-// Hide all branding
-widget.setAttribute('hide-branding', 'true');
-```
+4. **Seamless integration**: The ElevenLabs widget functions exactly as intended
 
 ## Advanced Usage
 

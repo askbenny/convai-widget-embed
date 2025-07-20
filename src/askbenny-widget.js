@@ -17,7 +17,7 @@ class AskBennyWidget extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["agent-id", "hide-branding"];
+    return ["agent-id"];
   }
 
   connectedCallback() {
@@ -34,12 +34,6 @@ class AskBennyWidget extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === "agent-id" && oldValue !== newValue) {
       this.loadElevenLabsWidget(newValue || "");
-    } else if (name === "hide-branding" && oldValue !== newValue) {
-      // Reload the widget with new branding settings
-      const agentId = this.getAttribute("agent-id") || "";
-      if (agentId) {
-        this.loadElevenLabsWidget(agentId);
-      }
     }
   }
 
@@ -54,55 +48,29 @@ class AskBennyWidget extends HTMLElement {
     // Clear existing content
     this.innerHTML = "";
 
-    try {
-      // Load ElevenLabs' embed script first to ensure custom element is registered
-      await this.loadElevenLabsScript();
+    // Create the official ElevenLabs element programmatically
+    const convai = document.createElement("elevenlabs-convai");
+    convai.setAttribute("agent-id", agentId);
 
-      // Now create the official ElevenLabs element after the script is loaded
-      const convai = document.createElement("elevenlabs-convai");
-      convai.setAttribute("agent-id", agentId);
-
-      // Copy any additional attributes from askbenny to elevenlabs-convai
-      Array.from(this.attributes).forEach((attr) => {
-        if (attr.name !== "agent-id" && attr.name !== "hide-branding") {
-          convai.setAttribute(attr.name, attr.value);
-        }
-      });
-
-      this.appendChild(convai);
-
-      // Handle branding based on hide-branding attribute
-      const hideBranding = this.getAttribute("hide-branding") === "true";
-      if (hideBranding) {
-        // Remove all branding
-        this.removeElevenLabsBranding(convai);
-      } else {
-        // Replace ElevenLabs branding with AskBenny branding
-        this.replaceWithAskBennyBranding(convai);
+    // Copy any additional attributes from askbenny to elevenlabs-convai
+    Array.from(this.attributes).forEach((attr) => {
+      if (attr.name !== "agent-id") {
+        convai.setAttribute(attr.name, attr.value);
       }
-    } catch (error) {
-      console.error(
-        "AskBenny Widget: Failed to load ElevenLabs widget:",
-        error
-      );
-      this.innerHTML = `<div style="padding: 1rem; color: #666; text-align: center;">Failed to load voice widget</div>`;
-    }
+    });
+
+    this.appendChild(convai);
+
+    // Load ElevenLabs' embed script once per page
+    await this.loadElevenLabsScript();
+
+    // Remove the ElevenLabs branding overlay after the widget loads
+    this.removeElevenLabsBranding(convai);
   }
 
   loadElevenLabsScript() {
     return new Promise((resolve, reject) => {
-      // Check if the custom element is already defined (best indicator it's loaded)
-      if (
-        window.customElements &&
-        window.customElements.get("elevenlabs-convai")
-      ) {
-        window.__EL_CONVAI_LOADED__ = true;
-        this.isElevenLabsLoaded = true;
-        resolve();
-        return;
-      }
-
-      // Check if already loaded via our flag
+      // Check if already loaded
       if (window.__EL_CONVAI_LOADED__ || this.isElevenLabsLoaded) {
         resolve();
         return;
@@ -112,12 +80,7 @@ class AskBennyWidget extends HTMLElement {
       if (this.isElevenLabsLoading) {
         // Wait for the existing load to complete
         const checkLoaded = () => {
-          if (
-            window.__EL_CONVAI_LOADED__ ||
-            this.isElevenLabsLoaded ||
-            (window.customElements &&
-              window.customElements.get("elevenlabs-convai"))
-          ) {
+          if (window.__EL_CONVAI_LOADED__ || this.isElevenLabsLoaded) {
             resolve();
           } else {
             setTimeout(checkLoaded, 100);
@@ -134,21 +97,10 @@ class AskBennyWidget extends HTMLElement {
       script.async = true;
 
       script.onload = () => {
-        // Wait a bit for the custom element to be defined
-        const waitForCustomElement = () => {
-          if (
-            window.customElements &&
-            window.customElements.get("elevenlabs-convai")
-          ) {
-            window.__EL_CONVAI_LOADED__ = true;
-            this.isElevenLabsLoaded = true;
-            this.isElevenLabsLoading = false;
-            resolve();
-          } else {
-            setTimeout(waitForCustomElement, 50);
-          }
-        };
-        waitForCustomElement();
+        window.__EL_CONVAI_LOADED__ = true;
+        this.isElevenLabsLoaded = true;
+        this.isElevenLabsLoading = false;
+        resolve();
       };
 
       script.onerror = (error) => {
@@ -157,29 +109,7 @@ class AskBennyWidget extends HTMLElement {
         reject(error);
       };
 
-      // Check if script is already present
-      const existingScript = document.querySelector(
-        'script[src="https://unpkg.com/@elevenlabs/convai-widget-embed"]'
-      );
-      if (existingScript) {
-        // Script exists, just wait for custom element to be defined
-        const waitForExistingScript = () => {
-          if (
-            window.customElements &&
-            window.customElements.get("elevenlabs-convai")
-          ) {
-            window.__EL_CONVAI_LOADED__ = true;
-            this.isElevenLabsLoaded = true;
-            this.isElevenLabsLoading = false;
-            resolve();
-          } else {
-            setTimeout(waitForExistingScript, 100);
-          }
-        };
-        waitForExistingScript();
-      } else {
-        document.head.appendChild(script);
-      }
+      document.head.appendChild(script);
     });
   }
 
@@ -307,113 +237,6 @@ class AskBennyWidget extends HTMLElement {
     return hasElevenLabsText && (hasElevenLabsLink || hasOverlayClass);
   }
 
-  replaceWithAskBennyBranding(convaiElement) {
-    // Wait for the widget to fully load and render its DOM
-    const checkAndReplaceOverlay = () => {
-      // Look for the branding overlay within the convai element or its shadow DOM
-      const overlaySelectors = [".overlay", '[class*="overlay"]'];
-
-      // Check regular DOM first
-      for (const selector of overlaySelectors) {
-        try {
-          const overlay = convaiElement.querySelector(selector);
-          if (overlay && this.isElevenLabsOverlay(overlay)) {
-            this.replaceOverlayContent(overlay);
-            console.log(
-              "AskBenny: Replaced ElevenLabs branding with AskBenny branding"
-            );
-            return true;
-          }
-        } catch (e) {
-          // Selector might not be supported in all browsers
-        }
-      }
-
-      // Check shadow DOM if available
-      if (convaiElement.shadowRoot) {
-        for (const selector of overlaySelectors) {
-          try {
-            const overlay = convaiElement.shadowRoot.querySelector(selector);
-            if (overlay && this.isElevenLabsOverlay(overlay)) {
-              this.replaceOverlayContent(overlay);
-              console.log(
-                "AskBenny: Replaced ElevenLabs branding with AskBenny branding from shadow DOM"
-              );
-              return true;
-            }
-          } catch (e) {
-            // Selector might not be supported
-          }
-        }
-      }
-
-      // Fallback: search for any element containing "Powered by ElevenLabs"
-      const allElements = convaiElement.querySelectorAll("*");
-      for (const element of allElements) {
-        if (this.isElevenLabsOverlay(element)) {
-          this.replaceOverlayContent(element);
-          console.log(
-            "AskBenny: Replaced ElevenLabs branding with AskBenny branding (fallback method)"
-          );
-          return true;
-        }
-      }
-
-      // Check shadow DOM elements with fallback
-      if (convaiElement.shadowRoot) {
-        const shadowElements = convaiElement.shadowRoot.querySelectorAll("*");
-        for (const element of shadowElements) {
-          if (this.isElevenLabsOverlay(element)) {
-            this.replaceOverlayContent(element);
-            console.log(
-              "AskBenny: Replaced ElevenLabs branding with AskBenny branding from shadow DOM (fallback method)"
-            );
-            return true;
-          }
-        }
-      }
-
-      return false;
-    };
-
-    // Try immediately
-    if (checkAndReplaceOverlay()) {
-      return;
-    }
-
-    // If not found immediately, set up a MutationObserver to watch for DOM changes
-    const observer = new MutationObserver((mutations) => {
-      if (checkAndReplaceOverlay()) {
-        observer.disconnect();
-      }
-    });
-
-    // Observe the convai element and its children for changes
-    observer.observe(convaiElement, {
-      childList: true,
-      subtree: true,
-      attributes: false,
-    });
-
-    // Also try periodically in case MutationObserver misses it
-    let attempts = 0;
-    const maxAttempts = 20; // Try for ~10 seconds
-    const intervalId = setInterval(() => {
-      attempts++;
-      if (checkAndReplaceOverlay() || attempts >= maxAttempts) {
-        clearInterval(intervalId);
-        observer.disconnect();
-      }
-    }, 500);
-  }
-
-  replaceOverlayContent(overlayElement) {
-    // Create new AskBenny branding content
-    overlayElement.innerHTML = `<div class="overlay !flex transition-opacity duration-200 data-hidden:opacity-0 flex-col justify-end items-end">
-    <p class="whitespace-nowrap [line-height:var(--el-overlay-padding)] text-[10px] px-3 translate-y-[calc(var(--el-overlay-padding))]"><span class="opacity-30">Powered by</span> <a href="https://askbenny.ca" target="_blank" class="underline cursor-pointer pointer-events-auto focus-visible:outline-none opacity-30 hover:opacity-50 focus-visible:opacity-100 focus-visible:underline-offset-2">askbenny.ca</a></p>
-    </div>`;
-  }
-
   // Public API methods
   static create(agentId, container = document.body) {
     const widget = document.createElement("ask-benny");
@@ -425,9 +248,8 @@ class AskBennyWidget extends HTMLElement {
   // Utility method to check if ElevenLabs is available
   static isElevenLabsLoaded() {
     return !!(
-      (window.customElements &&
-        window.customElements.get("elevenlabs-convai")) ||
-      window.__EL_CONVAI_LOADED__
+      window.__EL_CONVAI_LOADED__ ||
+      window.customElements.get("elevenlabs-convai")
     );
   }
 }
