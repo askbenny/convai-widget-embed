@@ -2,7 +2,7 @@
  * AskBenny Widget - A custom wrapper for ElevenLabs ConvAI widget
  *
  * Usage:
- * <askbenny agent-id="your-agent-id"></askbenny>
+ * <ask-benny agent-id="your-agent-id"></ask-benny>
  *
  * Or programmatically:
  * import { AskBennyWidget } from '@askbenny/widget';
@@ -112,7 +112,7 @@ class AskBennyWidget extends HTMLElement {
 
   // Public API methods
   static create(agentId, container = document.body) {
-    const widget = document.createElement("askbenny");
+    const widget = document.createElement("ask-benny");
     widget.setAttribute("agent-id", agentId);
     container.appendChild(widget);
     return widget;
@@ -131,9 +131,9 @@ class AskBennyWidget extends HTMLElement {
 if (
   typeof window !== "undefined" &&
   window.customElements &&
-  !window.customElements.get("askbenny")
+  !window.customElements.get("ask-benny")
 ) {
-  window.customElements.define("askbenny", AskBennyWidget);
+  window.customElements.define("ask-benny", AskBennyWidget);
 }
 
 // Export for module usage
