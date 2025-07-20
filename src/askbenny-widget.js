@@ -103,6 +103,7 @@ class AskBennyWidget extends HTMLElement {
     CustomAttributeList.forEach((attrName) => {
       const attrValue = this.getAttribute(attrName);
       if (attrValue !== null) {
+        console.log("AskBenny: Setting attribute", attrName, attrValue);
         convai.setAttribute(attrName, attrValue);
       }
     });
