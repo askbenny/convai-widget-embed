@@ -52,6 +52,13 @@ class AskBennyWidget extends HTMLElement {
     const convai = document.createElement("elevenlabs-convai");
     convai.setAttribute("agent-id", agentId);
 
+    // Hide the widget initially to prevent overlay flashing
+    convai.style.visibility = "hidden";
+    convai.style.opacity = "0";
+
+    // Add CSS to hide potential branding overlays
+    this.addBrandingHideStyles();
+
     // Copy any additional attributes from askbenny to elevenlabs-convai
     Array.from(this.attributes).forEach((attr) => {
       if (attr.name !== "agent-id") {
@@ -64,8 +71,13 @@ class AskBennyWidget extends HTMLElement {
     // Load ElevenLabs' embed script once per page
     await this.loadElevenLabsScript();
 
-    // Remove the ElevenLabs branding overlay after the widget loads
-    this.removeElevenLabsBranding(convai);
+    // Remove the ElevenLabs branding overlay before showing the widget
+    await this.removeElevenLabsBranding(convai);
+
+    // Show the widget after branding is removed
+    convai.style.visibility = "visible";
+    convai.style.opacity = "1";
+    convai.style.transition = "opacity 0.3s ease-in-out";
   }
 
   loadElevenLabsScript() {
@@ -113,106 +125,144 @@ class AskBennyWidget extends HTMLElement {
     });
   }
 
-  removeElevenLabsBranding(convaiElement) {
-    // Wait for the widget to fully load and render its DOM
-    const checkAndRemoveOverlay = () => {
-      // Look for the branding overlay within the convai element or its shadow DOM
-      const overlaySelectors = [
-        ".overlay",
-        '[class*="overlay"]',
-        '*:has-text("Powered by ElevenLabs")', // CSS4 selector for text content
-      ];
+  addBrandingHideStyles() {
+    // Only add styles once per page
+    if (document.getElementById("askbenny-hide-branding")) {
+      return;
+    }
 
-      // Check regular DOM first
-      for (const selector of overlaySelectors) {
-        try {
-          const overlay = convaiElement.querySelector(selector);
-          if (overlay && this.isElevenLabsOverlay(overlay)) {
-            overlay.remove();
-            console.log("AskBenny: Removed ElevenLabs branding overlay");
-            return true;
-          }
-        } catch (e) {
-          // Selector might not be supported in all browsers
-        }
+    const style = document.createElement("style");
+    style.id = "askbenny-hide-branding";
+    style.textContent = `
+      /* Hide ElevenLabs branding overlays */
+      elevenlabs-convai [class*="overlay"],
+      elevenlabs-convai .overlay,
+      elevenlabs-convai [class*="opacity-"],
+      elevenlabs-convai [class*="transition-opacity"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
       }
+      
+      /* Hide elements containing ElevenLabs branding text */
+      elevenlabs-convai *:has-text("Powered by ElevenLabs"),
+      elevenlabs-convai *:has-text("elevenlabs") {
+        display: none !important;
+      }
+      
+      /* Hide links to ElevenLabs */
+      elevenlabs-convai a[href*="elevenlabs.io"] {
+        display: none !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
 
-      // Check shadow DOM if available
-      if (convaiElement.shadowRoot) {
+  removeElevenLabsBranding(convaiElement) {
+    return new Promise((resolve) => {
+      // Wait for the widget to fully load and render its DOM
+      const checkAndRemoveOverlay = () => {
+        // Look for the branding overlay within the convai element or its shadow DOM
+        const overlaySelectors = [
+          ".overlay",
+          '[class*="overlay"]',
+          '*:has-text("Powered by ElevenLabs")', // CSS4 selector for text content
+        ];
+
+        // Check regular DOM first
         for (const selector of overlaySelectors) {
           try {
-            const overlay = convaiElement.shadowRoot.querySelector(selector);
+            const overlay = convaiElement.querySelector(selector);
             if (overlay && this.isElevenLabsOverlay(overlay)) {
               overlay.remove();
-              console.log(
-                "AskBenny: Removed ElevenLabs branding overlay from shadow DOM"
-              );
+              console.log("AskBenny: Removed ElevenLabs branding overlay");
               return true;
             }
           } catch (e) {
-            // Selector might not be supported
+            // Selector might not be supported in all browsers
           }
         }
-      }
 
-      // Fallback: search for any element containing "Powered by ElevenLabs"
-      const allElements = convaiElement.querySelectorAll("*");
-      for (const element of allElements) {
-        if (this.isElevenLabsOverlay(element)) {
-          element.remove();
-          console.log(
-            "AskBenny: Removed ElevenLabs branding overlay (fallback method)"
-          );
-          return true;
+        // Check shadow DOM if available
+        if (convaiElement.shadowRoot) {
+          for (const selector of overlaySelectors) {
+            try {
+              const overlay = convaiElement.shadowRoot.querySelector(selector);
+              if (overlay && this.isElevenLabsOverlay(overlay)) {
+                overlay.remove();
+                console.log(
+                  "AskBenny: Removed ElevenLabs branding overlay from shadow DOM"
+                );
+                return true;
+              }
+            } catch (e) {
+              // Selector might not be supported
+            }
+          }
         }
-      }
 
-      // Check shadow DOM elements with fallback
-      if (convaiElement.shadowRoot) {
-        const shadowElements = convaiElement.shadowRoot.querySelectorAll("*");
-        for (const element of shadowElements) {
+        // Fallback: search for any element containing "Powered by ElevenLabs"
+        const allElements = convaiElement.querySelectorAll("*");
+        for (const element of allElements) {
           if (this.isElevenLabsOverlay(element)) {
             element.remove();
             console.log(
-              "AskBenny: Removed ElevenLabs branding overlay from shadow DOM (fallback method)"
+              "AskBenny: Removed ElevenLabs branding overlay (fallback method)"
             );
             return true;
           }
         }
-      }
 
-      return false;
-    };
+        // Check shadow DOM elements with fallback
+        if (convaiElement.shadowRoot) {
+          const shadowElements = convaiElement.shadowRoot.querySelectorAll("*");
+          for (const element of shadowElements) {
+            if (this.isElevenLabsOverlay(element)) {
+              element.remove();
+              console.log(
+                "AskBenny: Removed ElevenLabs branding overlay from shadow DOM (fallback method)"
+              );
+              return true;
+            }
+          }
+        }
 
-    // Try immediately
-    if (checkAndRemoveOverlay()) {
-      return;
-    }
+        return false;
+      };
 
-    // If not found immediately, set up a MutationObserver to watch for DOM changes
-    const observer = new MutationObserver((mutations) => {
+      // Try immediately
       if (checkAndRemoveOverlay()) {
-        observer.disconnect();
+        resolve();
+        return;
       }
-    });
 
-    // Observe the convai element and its children for changes
-    observer.observe(convaiElement, {
-      childList: true,
-      subtree: true,
-      attributes: false,
-    });
+      // If not found immediately, set up a MutationObserver to watch for DOM changes
+      const observer = new MutationObserver((mutations) => {
+        if (checkAndRemoveOverlay()) {
+          observer.disconnect();
+          resolve();
+        }
+      });
 
-    // Also try periodically in case MutationObserver misses it
-    let attempts = 0;
-    const maxAttempts = 20; // Try for ~10 seconds
-    const intervalId = setInterval(() => {
-      attempts++;
-      if (checkAndRemoveOverlay() || attempts >= maxAttempts) {
-        clearInterval(intervalId);
-        observer.disconnect();
-      }
-    }, 500);
+      // Observe the convai element and its children for changes
+      observer.observe(convaiElement, {
+        childList: true,
+        subtree: true,
+        attributes: false,
+      });
+
+      // Also try periodically in case MutationObserver misses it
+      let attempts = 0;
+      const maxAttempts = 20; // Try for ~10 seconds
+      const intervalId = setInterval(() => {
+        attempts++;
+        if (checkAndRemoveOverlay() || attempts >= maxAttempts) {
+          clearInterval(intervalId);
+          observer.disconnect();
+          resolve(); // Resolve even if we couldn't remove the overlay
+        }
+      }, 500);
+    });
   }
 
   isElevenLabsOverlay(element) {
