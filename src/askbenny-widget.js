@@ -34,6 +34,30 @@ const CustomAttributeList = [
   "text-input",
   "text-contents",
   "user-id",
+  // Additional attributes from ElevenLabs ConvAI widget
+  "expandable",
+  "feedback-mode",
+  "bg-color",
+  "text-color",
+  "btn-color",
+  "btn-text-color",
+  "border-color",
+  "focus-color",
+  "border-radius",
+  "btn-radius",
+  "action-text",
+  "start-call-text",
+  "end-call-text",
+  "expand-text",
+  "listening-text",
+  "speaking-text",
+  "disable-banner",
+  "mic-muting-enabled",
+  "transcript-enabled",
+  "text-input-enabled",
+  "language-selector",
+  "supports-text-only",
+  "widget-config",
 ];
 
 class AskBennyWidget extends HTMLElement {
@@ -50,9 +74,12 @@ class AskBennyWidget extends HTMLElement {
 
   connectedCallback() {
     const agentId = this.getAttribute("agent-id") || "";
+    const signedUrl = this.getAttribute("signed-url") || "";
 
-    if (!agentId) {
-      console.warn("AskBenny Widget: agent-id attribute is required");
+    if (!agentId && !signedUrl) {
+      console.warn(
+        "AskBenny Widget: either 'agent-id' or 'signed-url' attribute is required"
+      );
       return;
     }
 
@@ -68,9 +95,15 @@ class AskBennyWidget extends HTMLElement {
         this.convaiElement.setAttribute(name, newValue);
       }
 
-      // If agent-id changed and we don't have one, warn the user
-      if (name === "agent-id" && !newValue) {
-        console.warn("AskBenny Widget: agent-id attribute is required");
+      // If both agent-id and signed-url are missing, warn the user
+      if (
+        (name === "agent-id" || name === "signed-url") &&
+        !this.getAttribute("agent-id") &&
+        !this.getAttribute("signed-url")
+      ) {
+        console.warn(
+          "AskBenny Widget: either 'agent-id' or 'signed-url' attribute is required"
+        );
       }
     }
   }
@@ -82,9 +115,6 @@ class AskBennyWidget extends HTMLElement {
   }
 
   async loadElevenLabsWidget() {
-    const agentId = this.getAttribute("agent-id");
-    if (!agentId) return;
-
     // Clear existing content
     this.innerHTML = "";
 
