@@ -9,15 +9,43 @@
  * // Widget will auto-register the custom element
  */
 
+// List of all supported attributes that can be passed to the ElevenLabs ConvAI widget
+const CustomAttributeList = [
+  "variant",
+  "placement",
+  "override-config",
+  "avatar-image-url",
+  "avatar-orb-color-1",
+  "avatar-orb-color-2",
+  "agent-id",
+  "signed-url",
+  "terms-key",
+  "server-location",
+  "language",
+  "dynamic-variables",
+  "show-avatar-when-collapsed",
+  "override-prompt",
+  "override-first-message",
+  "override-language",
+  "override-voice-id",
+  "override-text-only",
+  "mic-muting",
+  "transcript",
+  "text-input",
+  "text-contents",
+  "user-id",
+];
+
 class AskBennyWidget extends HTMLElement {
   constructor() {
     super();
     this.isElevenLabsLoaded = false;
     this.isElevenLabsLoading = false;
+    this.convaiElement = null;
   }
 
   static get observedAttributes() {
-    return ["agent-id"];
+    return CustomAttributeList;
   }
 
   connectedCallback() {
@@ -28,21 +56,33 @@ class AskBennyWidget extends HTMLElement {
       return;
     }
 
-    this.loadElevenLabsWidget(agentId);
+    this.loadElevenLabsWidget();
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "agent-id" && oldValue !== newValue) {
-      this.loadElevenLabsWidget(newValue || "");
+    if (oldValue !== newValue && this.convaiElement) {
+      // Update the corresponding attribute on the elevenlabs-convai element
+      if (newValue === null) {
+        this.convaiElement.removeAttribute(name);
+      } else {
+        this.convaiElement.setAttribute(name, newValue);
+      }
+
+      // If agent-id changed and we don't have one, warn the user
+      if (name === "agent-id" && !newValue) {
+        console.warn("AskBenny Widget: agent-id attribute is required");
+      }
     }
   }
 
   disconnectedCallback() {
     // Clean up when element is removed
     this.innerHTML = "";
+    this.convaiElement = null;
   }
 
-  async loadElevenLabsWidget(agentId) {
+  async loadElevenLabsWidget() {
+    const agentId = this.getAttribute("agent-id");
     if (!agentId) return;
 
     // Clear existing content
@@ -50,7 +90,7 @@ class AskBennyWidget extends HTMLElement {
 
     // Create the official ElevenLabs element programmatically
     const convai = document.createElement("elevenlabs-convai");
-    convai.setAttribute("agent-id", agentId);
+    this.convaiElement = convai;
 
     // Hide the widget initially to prevent overlay flashing
     convai.style.visibility = "hidden";
@@ -59,10 +99,11 @@ class AskBennyWidget extends HTMLElement {
     // Add CSS to hide potential branding overlays
     this.addBrandingHideStyles();
 
-    // Copy any additional attributes from askbenny to elevenlabs-convai
-    Array.from(this.attributes).forEach((attr) => {
-      if (attr.name !== "agent-id") {
-        convai.setAttribute(attr.name, attr.value);
+    // Copy all supported attributes from askbenny to elevenlabs-convai
+    CustomAttributeList.forEach((attrName) => {
+      const attrValue = this.getAttribute(attrName);
+      if (attrValue !== null) {
+        convai.setAttribute(attrName, attrValue);
       }
     });
 
