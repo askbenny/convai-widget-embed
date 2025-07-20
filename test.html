@@ -89,7 +89,7 @@
             <h3>4. HTML Widget Test</h3>
             <p>This widget should load automatically when the page loads:</p>
             <div style="border: 2px dashed #ccc; padding: 1rem; min-height: 100px;">
-                <askbenny agent-id="agent_01jym2zzfrecjr53vhcn8kg8gq"></askbenny>
+                <ask-benny agent-id="agent_01jym2zzfrecjr53vhcn8kg8gq"></ask-benny>
             </div>
         </div>
 
@@ -123,10 +123,10 @@
 
         function testCustomElement() {
             try {
-                const defined = window.customElements && window.customElements.get('askbenny');
+                const defined = window.customElements && window.customElements.get('ask-benny');
                 const message = defined
-                    ? '✅ Custom element "askbenny" is registered'
-                    : '❌ Custom element "askbenny" is not registered';
+                    ? '✅ Custom element "ask-benny" is registered'
+                    : '❌ Custom element "ask-benny" is not registered';
                 showStatus('element-status', message, defined);
             } catch (error) {
                 showStatus('element-status', `❌ Error: ${error.message}`, false);
@@ -149,7 +149,7 @@
                 );
 
                 const hasAgentId = widget.getAttribute('agent-id') === 'agent_01jym2zzfrecjr53vhcn8kg8gq';
-                const isAskbennyElement = widget.tagName.toLowerCase() === 'askbenny';
+                const isAskbennyElement = widget.tagName.toLowerCase() === 'ask-benny';
 
                 if (hasAgentId && isAskbennyElement) {
                     showStatus('programmatic-status', '✅ Widget created successfully via API', true);

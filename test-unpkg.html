@@ -58,7 +58,7 @@
 
         <h2>AskBenny Widget (from Unpkg):</h2>
         <div class="widget-container">
-            <askbenny agent-id="agent_01jzjw7v9se08t0fv0wy9517tq"></askbenny>
+            <ask-benny agent-id="agent_01jzjw7v9se08t0fv0wy9517tq"></ask-benny>
         </div>
 
         <div id="status"></div>
@@ -75,10 +75,10 @@
         window.addEventListener('DOMContentLoaded', function () {
             const statusDiv = document.getElementById('status');
 
-            setTimeout(() => {
-                const askbennyDefined = window.customElements.get('askbenny');
+                        setTimeout(() => {
+                const askbennyDefined = window.customElements.get('ask-benny');
                 const widgetAvailable = typeof window.AskBennyWidget !== 'undefined';
-
+                
                 if (askbennyDefined && widgetAvailable) {
                     statusDiv.innerHTML = '<div class="status success">✅ AskBenny widget loaded successfully!</div>';
                 } else {
@@ -87,7 +87,7 @@
                     if (!widgetAvailable) msg += 'AskBennyWidget not on window. ';
                     statusDiv.innerHTML = `<div class="status error">${msg}</div>`;
                 }
-
+                
                 // Log details for debugging
                 console.log('AskBenny custom element:', askbennyDefined);
                 console.log('AskBennyWidget on window:', widgetAvailable);
