@@ -1,0 +1,59 @@
+# Cursor Rules for Conversational AI Widget Embed
+
+## Project Context
+This is a TypeScript library that provides a conversational AI widget embed. It's built with Vite and serves as a wrapper around @askbenny/convai-widget-core.
+
+## Code Style & Standards
+
+### TypeScript
+- Use strict TypeScript configuration
+- Target ES5 for maximum browser compatibility
+- Use ES2015+ features where appropriate
+- Always provide proper type annotations
+- Use interfaces over type aliases for object shapes
+
+### Code Organization
+- Keep the main entry point (src/index.ts) minimal and focused
+- Follow the existing pattern of importing and registering widgets
+- Maintain the IIFE build format for easy embedding
+
+### Dependencies
+- Minimize external dependencies
+- Use @askbenny/convai-widget-core as the primary dependency
+- Keep devDependencies up to date but stable
+
+## Build & Development
+
+### Commands to Remember
+- `pnpm run build` - Build the library
+- `pnpm run lint` - Run all linting (TS, ESLint, Prettier)
+- `pnpm run lint:ts` - TypeScript checking only
+- Use pnpm as the package manager
+
+### Build Configuration
+- Maintain Vite configuration for IIFE bundle format
+- Output should go to dist/index.js
+- Library name should be "ConvaiWidgetEmbed"
+
+## File Structure
+- Keep source code in src/
+- Main entry: src/index.ts
+- Build output: dist/index.js
+- Config files at root level
+
+## Documentation
+- Update README.md when adding new features
+- Include usage examples for both CDN and ES module imports
+- Document any configuration options
+
+## Quality Assurance
+- Always run linting before commits
+- Ensure TypeScript compiles without errors
+- Test the built bundle works as expected
+- Maintain backwards compatibility
+
+## Naming Conventions
+- Use camelCase for variables and functions
+- Use PascalCase for classes and interfaces
+- Use kebab-case for file names when appropriate
+- Follow existing naming patterns in the codebase
