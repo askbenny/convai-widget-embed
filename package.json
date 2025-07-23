@@ -18,7 +18,7 @@
   "author": "ElevenLabs",
   "license": "MIT",
   "devDependencies": {
-    "@askbenny/convai-widget-core": "^0.0.14",
+    "@askbenny/convai-widget-core": "^0.0.15",
     "eslint": "^9.8.0",
     "microbundle": "^0.15.1",
     "typescript": "^5.5.4",
