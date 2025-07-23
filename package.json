@@ -1,6 +1,6 @@
 {
   "name": "@askbenny/convai-widget-embed",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "The Conversational AI Widget bundled with all dependencies for easy embedding.",
   "main": "./dist/index.js",
   "unpkg": "./dist/index.js",
