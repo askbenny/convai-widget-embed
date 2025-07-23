@@ -1,44 +1,32 @@
 {
-  "name": "@askbenny/widget",
-  "version": "0.0.20",
-  "description": "A custom wrapper for ElevenLabs ConvAI widget that provides a branded embed experience",
+  "name": "@askbenny/convai-widget-embed",
+  "version": "0.0.12",
+  "description": "The Conversational AI Widget bundled with all dependencies for easy embedding.",
+  "main": "./dist/index.js",
+  "unpkg": "./dist/index.js",
+  "source": "src/index.ts",
   "type": "module",
-  "main": "dist/askbenny-widget.js",
-  "module": "dist/askbenny-widget.esm.js",
-  "browser": "dist/askbenny-widget.umd.js",
-  "unpkg": "dist/askbenny-widget.umd.js",
-  "jsdelivr": "dist/askbenny-widget.umd.js",
-  "types": "dist/types.d.ts",
-  "files": [
-    "dist/"
-  ],
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "build": "vite build",
+    "lint": "npm run lint:ts && npm run lint:es && npm run lint:prettier",
+    "lint:ts": "tsc --noEmit --skipLibCheck",
+    "lint:es": "npx eslint .",
+    "lint:prettier": "prettier 'src/**/*.ts'",
     "prepublishOnly": "npm run build"
   },
-  "keywords": [
-    "elevenlabs",
-    "convai",
-    "widget",
-    "embed",
-    "askbenny",
-    "voice",
-    "ai"
-  ],
-  "author": "AskBenny",
+  "keywords": [],
+  "author": "ElevenLabs",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "rollup": "^4.9.1"
+    "@askbenny/convai-widget-core": "^0.0.14",
+    "eslint": "^9.8.0",
+    "microbundle": "^0.15.1",
+    "typescript": "^5.5.4",
+    "vite": "^6.3.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/askbenny/widget.git"
-  },
-  "homepage": "https://github.com/askbenny/widget#readme",
-  "bugs": {
-    "url": "https://github.com/askbenny/widget/issues"
+    "url": "git+https://github.com/askbenny/convai-widget-embed.git",
+    "directory": "packages/convai-widget-embed"
   }
 }
