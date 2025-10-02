@@ -12,10 +12,10 @@ importers:
         specifier: ^0.0.15
         version: 0.0.15(@types/dom-mediacapture-record@1.0.22)
       '@typescript-eslint/eslint-plugin':
-        specifier: 8.45.0
+        specifier: ^8.45.0
         version: 8.45.0(@typescript-eslint/parser@8.45.0(eslint@9.31.0)(typescript@5.8.3))(eslint@9.31.0)(typescript@5.8.3)
       '@typescript-eslint/parser':
-        specifier: 8.45.0
+        specifier: ^8.45.0
         version: 8.45.0(eslint@9.31.0)(typescript@5.8.3)
       eslint:
         specifier: ^9.8.0
