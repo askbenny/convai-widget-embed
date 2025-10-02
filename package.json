@@ -1,6 +1,6 @@
 {
   "name": "@askbenny/convai-widget-embed",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "The Conversational AI Widget bundled with all dependencies for easy embedding.",
   "main": "./dist/index.js",
   "unpkg": "./dist/index.js",
@@ -20,7 +20,7 @@
   "author": "ElevenLabs",
   "license": "MIT",
   "devDependencies": {
-    "@askbenny/convai-widget-core": "^0.0.15",
+    "@askbenny/convai-widget-core": "^1.1.30",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.45.0",
     "eslint": "^9.8.0",
