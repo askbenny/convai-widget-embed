@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@askbenny/convai-widget-core':
-        specifier: 1.1.36
-        version: 1.1.36(@types/dom-mediacapture-record@1.0.22)
+        specifier: 1.2.1
+        version: 1.2.1(@types/dom-mediacapture-record@1.0.22)
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.45.0
         version: 8.45.0(@typescript-eslint/parser@8.45.0(eslint@9.31.0)(typescript@5.8.3))(eslint@9.31.0)(typescript@5.8.3)
@@ -42,8 +42,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@askbenny/convai-widget-core@1.1.36':
-    resolution: {integrity: sha512-h2NUJ0/daav3ys4CCrYBweD4lty9YFfFcSxrpo0EXeHT3YWExuWhmhqqis6I9tBCOMDjoFp3dDQqihfiozhqZQ==}
+  '@askbenny/convai-widget-core@1.2.1':
+    resolution: {integrity: sha512-UWImPNXHf5sGVkB4ax855j/RiLihylo3XJLODGuPHbbTkvGc8tVy+4FcwFQw+J5M7gB9vODBaB1TnQ+2U6I8qg==}
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -2913,7 +2913,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.12
       '@jridgewell/trace-mapping': 0.3.29
 
-  '@askbenny/convai-widget-core@1.1.36(@types/dom-mediacapture-record@1.0.22)':
+  '@askbenny/convai-widget-core@1.2.1(@types/dom-mediacapture-record@1.0.22)':
     dependencies:
       '@elevenlabs/client': 0.4.0(@types/dom-mediacapture-record@1.0.22)
       '@preact/signals': 2.2.1(preact@10.26.9)
