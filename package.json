@@ -1,6 +1,6 @@
 {
   "name": "@askbenny/convai-widget-embed",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "The Conversational AI Widget bundled with all dependencies for easy embedding.",
   "main": "./dist/index.js",
   "unpkg": "./dist/index.js",
@@ -9,23 +9,19 @@
   "scripts": {
     "build": "vite build",
     "build:analyze": "ANALYZE=true vite build",
-    "lint": "pnpm run check-types && pnpm run lint:es && pnpm run lint:prettier",
     "check-types": "tsc --noEmit --skipLibCheck",
     "lint:es": "pnpm exec eslint .",
-    "lint:prettier": "prettier 'src/**/*.ts'",
-    "prepublishOnly": "pnpm run build"
+    "lint:prettier": "prettier 'src/**/*.ts'"
   },
   "keywords": [],
   "author": "ElevenLabs",
   "license": "MIT",
   "devDependencies": {
-    "@askbenny/convai-widget-core": "1.3.1",
+    "@askbenny/convai-widget-core": "1.4.1",
     "eslint": "^9.8.0",
-    "microbundle": "^0.15.1",
-    "prettier": "^3.6.2",
     "typescript": "^5.5.4",
-    "vite": "^6.4.1",
-    "vite-bundle-analyzer": "^1.2.3"
+    "vite": "^7.3.1",
+    "vite-bundle-analyzer": "^1.3.2"
   },
   "publishConfig": {
     "access": "public"
