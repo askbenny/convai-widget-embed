@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@askbenny/convai-widget-core':
-        specifier: 1.4.1
-        version: 1.4.1(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)
+        specifier: 1.3.1
+        version: 1.3.1(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)
       eslint:
         specifier: ^9.8.0
         version: 9.31.0
@@ -26,8 +26,8 @@ importers:
 
 packages:
 
-  '@askbenny/convai-widget-core@1.4.1':
-    resolution: {integrity: sha512-Qa/gitA9v4vtiXzp4xKUa9rjROxpAFcSJOOmqIdGmaxhBAmvORItNss8joY5Pk9WHzZd4UT1FAsmJ37EukoFOA==}
+  '@askbenny/convai-widget-core@1.3.1':
+    resolution: {integrity: sha512-KlWyTQHpZwi5A1sq0s0Umy8emlyb+16AHS5dv74LxAvb0S+gpNj6oBTPW2UmFFcEn0IUao9gBEV2a8whZEZVeQ==}
 
   '@bufbuild/protobuf@1.10.1':
     resolution: {integrity: sha512-wJ8ReQbHxsAfXhrf9ixl0aYbZorRuOWpBNzm8pL8ftmSxQx/wnJD5Eg861NwJU/czy2VXFIebCeZnZrI9rktIQ==}
@@ -36,11 +36,11 @@ packages:
     resolution: {integrity: sha512-kzyuwOAQnXJNLS9PSyrk0CWk35nWJW/zl/6KvnTBMFK65gm7U1/Z5BqjxeapjZCIhQcM/DsrEmcbRwDyXyXK4A==}
     engines: {node: '>=14'}
 
-  '@elevenlabs/client@1.1.1':
-    resolution: {integrity: sha512-CFCIDERaU2i6ucRzY7ZZP9Z6eF8xpj1mSAUVcAPg17KNryS0Ia/yQAAfY+KNYsBaUL7P0akLaM8XT2zXS+EnsA==}
+  '@elevenlabs/client@0.12.2':
+    resolution: {integrity: sha512-QWllhDndFfKmftlktNoa35+AF3gOCbSHowYhR42ZHb5u32lFbMPbh2BALCrpFa3edqCHSXtzG6zzLSAGjkhvHQ==}
 
-  '@elevenlabs/types@0.9.0':
-    resolution: {integrity: sha512-LaTO48+R2dY6CdgGQbKUcpSPs+5BA9hbvwHg+27P6Rg4pDZA/rIBHyBVzEVmySZ7i7dGNXRcFlZp5vMAxqUHqw==}
+  '@elevenlabs/types@0.4.0':
+    resolution: {integrity: sha512-6CQb4r9DjepILhLybDxW0h8rvbsR8jPAp74HvFGYuvYdXcQRTkYTD9BQ4PV6VcuC1iqx0UljzJj8js3ADQ8EXw==}
 
   '@esbuild/aix-ppc64@0.27.7':
     resolution: {integrity: sha512-EKX3Qwmhz1eMdEJokhALr0YiD0lhQNwDqkPYyPhiSwKrh7/4KRjQc04sZ8db+5DVVnZ1LmbNDI1uAMPEUBnQPg==}
@@ -1264,10 +1264,10 @@ packages:
 
 snapshots:
 
-  '@askbenny/convai-widget-core@1.4.1(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)':
+  '@askbenny/convai-widget-core@1.3.1(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)':
     dependencies:
       '@ctrl/tinycolor': 4.2.0
-      '@elevenlabs/client': 1.1.1(@types/dom-mediacapture-record@1.0.22)
+      '@elevenlabs/client': 0.12.2(@types/dom-mediacapture-record@1.0.22)
       '@lezer/common': 1.5.0
       '@lezer/highlight': 1.2.3
       '@lezer/html': 1.3.13
@@ -1306,14 +1306,14 @@ snapshots:
 
   '@ctrl/tinycolor@4.2.0': {}
 
-  '@elevenlabs/client@1.1.1(@types/dom-mediacapture-record@1.0.22)':
+  '@elevenlabs/client@0.12.2(@types/dom-mediacapture-record@1.0.22)':
     dependencies:
-      '@elevenlabs/types': 0.9.0
+      '@elevenlabs/types': 0.4.0
       livekit-client: 2.15.3(@types/dom-mediacapture-record@1.0.22)
     transitivePeerDependencies:
       - '@types/dom-mediacapture-record'
 
-  '@elevenlabs/types@0.9.0': {}
+  '@elevenlabs/types@0.4.0': {}
 
   '@esbuild/aix-ppc64@0.27.7':
     optional: true
