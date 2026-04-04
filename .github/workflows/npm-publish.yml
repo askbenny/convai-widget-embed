@@ -56,7 +56,7 @@ jobs:
             #   continue-on-error: true # Don't fail the workflow if tests fail (you can change this)
 
             - name: Run linting
-              run: pnpm lint
+              run: pnpm lint:es
 
             - name: Configure Git
               run: |
