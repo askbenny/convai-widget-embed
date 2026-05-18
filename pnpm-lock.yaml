@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@askbenny/convai-widget-core':
-        specifier: 1.4.7
-        version: 1.4.7(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)
+        specifier: 1.4.9
+        version: 1.4.9(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)
       eslint:
         specifier: ^9.8.0
         version: 9.31.0
@@ -26,8 +26,8 @@ importers:
 
 packages:
 
-  '@askbenny/convai-widget-core@1.4.7':
-    resolution: {integrity: sha512-rASJwZEY6oh3aGVHP1CGQ9kDdrEoFGEdLyx47+KnyL4AxJ3z+sHqVYWSpnRAQQJqczYCTiyTQ/4E0/XrRr+hBA==}
+  '@askbenny/convai-widget-core@1.4.9':
+    resolution: {integrity: sha512-Mou/1TZBnCwBkqKSYE4BhfEe6F/9huRUTUy/6rq50LC68CA1UwDI/5ayhDZGJELOHmBs/FtgsG6FeQilcpju/Q==}
 
   '@bufbuild/protobuf@1.10.1':
     resolution: {integrity: sha512-wJ8ReQbHxsAfXhrf9ixl0aYbZorRuOWpBNzm8pL8ftmSxQx/wnJD5Eg861NwJU/czy2VXFIebCeZnZrI9rktIQ==}
@@ -1276,7 +1276,7 @@ packages:
 
 snapshots:
 
-  '@askbenny/convai-widget-core@1.4.7(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)':
+  '@askbenny/convai-widget-core@1.4.9(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)':
     dependencies:
       '@ctrl/tinycolor': 4.2.0
       '@elevenlabs/client': 1.1.1(@types/dom-mediacapture-record@1.0.22)
