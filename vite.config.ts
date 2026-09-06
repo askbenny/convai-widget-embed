@@ -1,15 +1,19 @@
 import { defineConfig } from "vite";
 import analyzer from "vite-bundle-analyzer";
 
-export default defineConfig({
-  build: {
-    lib: {
-      name: "ConvaiWidgetEmbed",
-      entry: "src/index.ts",
-      fileName: () => "index.js",
-      formats: ["iife"],
+export default defineConfig(({ mode }) => {
+  const website = mode === "website";
+  return {
+    build: {
+      lib: {
+        name: website ? "WebsiteWidgetEmbed" : "ConvaiWidgetEmbed",
+        entry: website ? "src/website.ts" : "src/index.ts",
+        fileName: () => (website ? "website.js" : "index.js"),
+        formats: ["iife"],
+      },
+      outDir: "dist",
+      emptyOutDir: !website,
     },
-    outDir: "dist",
-  },
-  plugins: [...(process.env.ANALYZE ? [analyzer()] : [])],
+    plugins: [...(process.env.ANALYZE ? [analyzer()] : [])],
+  };
 });

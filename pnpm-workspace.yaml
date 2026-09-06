@@ -1,2 +1,7 @@
 ignoredBuiltDependencies:
   - esbuild
+
+overrides:
+  "@elevenlabs/client": "1.1.1"
+  preact: "10.28.0"
+  "@preact/signals": "2.5.1"

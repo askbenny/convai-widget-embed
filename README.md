@@ -75,3 +75,39 @@ Part of the [convai-widget-embed](https://github.com/askbenny/convai-widget-embe
 ## License
 
 MIT © ElevenLabs
+
+## Neutral, Partner-hosted script
+
+The default `dist/index.js` and unpkg entrypoint still register `askbenny-convai`.
+The additional `dist/website.js` entrypoint registers **only** `website-widget`, so
+it coexists with old legacy scripts in either load order. Use the Partners portal
+loader to select the active hostname and production/development API automatically:
+
+```html
+<script src="https://portal.yourbrand.com/widget.js" defer></script>
+<website-widget widget-id="wgt_CLIENT_UNIQUE_ID"></website-widget>
+```
+
+For directly hosted builds, the classic script reads `data-api-base-url` and
+`data-portal-hostname` from its own script element synchronously. Explicit
+`api-base-url` and `portal-hostname` element attributes can override those defaults.
+No portal session or API key belongs in the embed. The backend enforces tenant,
+origin, entitlement, and enablement checks for every new conversation.
+
+`pnpm build` produces both self-contained bundles. `pnpm test` verifies entrypoint
+contracts; `pnpm check-types` checks types. Browser/SDK compatibility is covered
+by the core suite and the Partners browser suite, including both script orders.
+
+### Reproducible coordinated releases
+
+This feature is coordinated with `convai-widget-core` and `partners`. The first-party
+core tarball in `vendor/` makes the build independent of an unpublished npm version;
+`core-manifest.json` records its source commit and SHA-256. The bundle's runtime
+Preact, Signals, and ElevenLabs dependencies are pinned to the versions verified
+by the core suite. Only `dist/` is published to npm; the vendor snapshot is build input.
+
+After committing and testing core, run `node scripts/update-core.mjs ../convai-widget-core`,
+then `pnpm update @askbenny/convai-widget-core`, `pnpm test`, `pnpm check-types`, and
+`pnpm build`. Commit the snapshot, manifest, and lockfile together. From Partners,
+run `node scripts/sync-widget-runtime.mjs ../convai-widget-embed` after committing
+the embed build source. Publishing or merging remains a separate release action.
