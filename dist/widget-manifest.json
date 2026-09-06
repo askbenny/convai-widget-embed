@@ -1,0 +1,9 @@
+{
+  "embedVersion": "1.5.0",
+  "coreVersion": "1.5.0",
+  "coreCommit": "5400a29d8be4debb37de85da3c02952b7b6d52fd",
+  "files": {
+    "index.js": "511b0347592834410a9fdd8ef9691fa6dd60bad61c4cc861b3e5496e9516d1c7",
+    "website.js": "f862c7739a8fd51c0bffc9107291cc6e23d831346ff9791f71db5effe62256c7"
+  }
+}

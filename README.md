@@ -101,16 +101,14 @@ origin, entitlement, and enablement checks for every new conversation.
 contracts; `pnpm check-types` checks types. Browser/SDK compatibility is covered
 by the core suite and the Partners browser suite, including both script orders.
 
-### Reproducible coordinated releases
+### Package source
 
-This feature is coordinated with `convai-widget-core` and `partners`. The first-party
-core tarball in `vendor/` makes the build independent of an unpublished npm version;
-`core-manifest.json` records its source commit and SHA-256. The bundle's runtime
-Preact, Signals, and ElevenLabs dependencies are pinned to the versions verified
-by the core suite. Only `dist/` is published to npm; the vendor snapshot is build input.
+The initial feature PR uses a verified core archive because core 1.5.0 is not yet
+published. The automated Sync core workflow replaces it with an exact npm version
+and removes the archive. Later core releases arrive through dependency-update PRs;
+normal releases do not require local builds or sibling checkouts. Only `dist/` is
+published, including both scripts and their checksum/source manifest.
 
-After committing and testing core, run `node scripts/update-core.mjs ../convai-widget-core`,
-then `pnpm update @askbenny/convai-widget-core`, `pnpm test`, `pnpm check-types`, and
-`pnpm build`. Commit the snapshot, manifest, and lockfile together. From Partners,
-run `node scripts/sync-widget-runtime.mjs ../convai-widget-embed` after committing
-the embed build source. Publishing or merging remains a separate release action.
+## Widget releases
+
+See [docs/RELEASING.md](docs/RELEASING.md) for version selection, package publishing, automatic dependency/runtime update PRs, initial rollout and rollback. Both embed formats are active and supported.

@@ -1,0 +1,67 @@
+name: Sync core package
+on:
+  repository_dispatch:
+    types: [core-released]
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Exact published stable version; blank checks latest
+        required: false
+        type: string
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+concurrency:
+  group: codex/update-widget-core
+  cancel-in-progress: false
+jobs:
+  update:
+    if: github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.32.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: pnpm
+      - name: Fetch published core
+        id: sync
+        env:
+          VERSION: ${{ inputs.version || github.event.client_payload.version || 'latest' }}
+        run: node scripts/sync-core.mjs "$VERSION"
+      - run: pnpm install --frozen-lockfile
+        if: steps.sync.outputs.changed == 'true'
+      - run: pnpm test:release
+        if: steps.sync.outputs.changed == 'true'
+      - run: pnpm test && pnpm check-types && pnpm lint:es && pnpm build
+        if: steps.sync.outputs.changed == 'true'
+      - uses: peter-evans/create-pull-request@v8
+        if: steps.sync.outputs.changed == 'true'
+        id: pr
+        with:
+          token: ${{ secrets.WIDGET_RELEASE_TOKEN || github.token }}
+          branch: codex/update-widget-core
+          base: main
+          title: "Update core from npm"
+          commit-message: "chore: update core from npm"
+          body: "Automatically imports a published, pinned package and validates the update. Review and merge to advance the release. See docs/RELEASING.md."
+          add-paths: |
+            package.json
+            pnpm-lock.yaml
+            pnpm-workspace.yaml
+            vendor
+            dist
+      - name: Validate automation branch explicitly
+        if: steps.pr.outputs.pull-request-number && steps.pr.outputs.pull-request-operation != 'none'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run ci.yml --ref codex/update-widget-core
