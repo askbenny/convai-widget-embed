@@ -78,9 +78,12 @@ MIT © ElevenLabs
 
 ## Neutral, Partner-hosted script
 
-The default `dist/index.js` and unpkg entrypoint still register `askbenny-convai`.
+The Ask Benny embed (`askbenny-convai`) and Partner-branded embed (`website-widget`)
+are both active, fully supported options. Neither is deprecated or requires migration.
+
+The default `dist/index.js` and unpkg entrypoint register `askbenny-convai`.
 The additional `dist/website.js` entrypoint registers **only** `website-widget`, so
-it coexists with old legacy scripts in either load order. Use the Partners portal
+it coexists with the Ask Benny script in either load order. Use the Partners portal
 loader to select the active hostname and production/development API automatically:
 
 ```html
