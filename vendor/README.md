@@ -3,9 +3,9 @@
 This package pins the companion widget core change without waiting for an npm release during PR review.
 
 - Source: https://github.com/askbenny/convai-widget-core/pull/45
-- Source commit: `8757ad1` (`codex/widget-branch-sessions`).
+- Source commit: `d779f4c` (`codex/widget-branch-sessions`).
 - Package: `@askbenny/convai-widget-core@1.4.12`.
-- Archive SHA-256: `622bcdc0f0226ab243861c6f665d148ec4c6bdf26ca070c614a32678e4a5d84c`.
+- Archive SHA-256: `6d3243d007503571723fbb335f213146ee66814eacdeede8bc126105c727c1e8`.
 - Produced in the core checkout with `npm run build` followed by `npm pack --ignore-scripts`.
 
 The archive contains the package's distributable files and metadata. It contains no environment files. The pnpm lockfile pins its integrity; the embed build consumes this exact archive, with no dependency on an unpublished registry version.

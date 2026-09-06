@@ -27,7 +27,7 @@ importers:
 packages:
 
   '@askbenny/convai-widget-core@file:vendor/askbenny-convai-widget-core-1.4.12.tgz':
-    resolution: {integrity: sha512-ag9fUo5a+sN3XG9xGV1cW6BqeOJ+84zHbyrtoWEfBlmboqGNKLw9lhCB1WIS0oeMm1245R3/C6sKQfxFQPxa2w==, tarball: file:vendor/askbenny-convai-widget-core-1.4.12.tgz}
+    resolution: {integrity: sha512-1CmmfQeJsR+stYrsD440GuilydrddSoNAVAIxkJi3F1bcd4S6UnsXOrBkp1FFDbKYvKDBPKgRy5WTPFJvA+pxg==, tarball: file:vendor/askbenny-convai-widget-core-1.4.12.tgz}
     version: 1.4.12
 
   '@bufbuild/protobuf@1.10.1':
