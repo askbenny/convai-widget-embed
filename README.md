@@ -75,3 +75,20 @@ Part of the [convai-widget-embed](https://github.com/askbenny/convai-widget-embe
 ## License
 
 MIT © ElevenLabs
+
+## 1.4.14 review build
+
+This patch keeps the existing `dist/index.js` classic-script entrypoint and
+`askbenny-convai` element. It bundles the targeted fixes from core 1.4.14 without
+upgrading the SDK or changing AskBenny session acquisition.
+
+Core 1.4.14 is not yet published, so this PR uses the reviewed archive in `vendor/`
+to make the build and browser checks reproducible. See `vendor/README.md` for its
+source revision. The archive is only a build dependency; the published embed still
+contains the self-contained `dist/index.js`. After core is published, replace the
+file dependency with exact npm version `1.4.14`, regenerate the lockfile, and rerun
+the build and browser checks before merging the embed release.
+
+Run `pnpm check-types`, `pnpm lint:es`, `pnpm build`, and `pnpm test`.
+Browser checks use Playwright Chromium (`pnpm exec playwright install chromium`);
+`PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` can select an installed Chromium browser.

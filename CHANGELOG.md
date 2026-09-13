@@ -1,5 +1,11 @@
 # @askbenny/convai-widget-embed
 
+## 1.4.14
+
+- Bundle core transcript, greeting, IME input, and host-page dropdown fixes while preserving managed sessions and SDK 1.1.1.
+- Add browser checks for the shipped classic bundle, including locked host prototypes and live disable-banner overrides.
+
+
 ## 1.3.1
 
 ## 1.3.0

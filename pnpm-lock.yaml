@@ -9,11 +9,14 @@ importers:
   .:
     devDependencies:
       '@askbenny/convai-widget-core':
-        specifier: 1.4.13
-        version: 1.4.13(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)
+        specifier: file:vendor/askbenny-convai-widget-core-1.4.14.tgz
+        version: file:vendor/askbenny-convai-widget-core-1.4.14.tgz(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)
       eslint:
         specifier: ^9.8.0
         version: 9.31.0
+      playwright:
+        specifier: 1.57.0
+        version: 1.57.0
       typescript:
         specifier: ^5.5.4
         version: 5.8.3
@@ -26,8 +29,9 @@ importers:
 
 packages:
 
-  '@askbenny/convai-widget-core@1.4.13':
-    resolution: {integrity: sha512-tH1Kr54qgUkKsN8uvwVBWv2cUjqXfjNym/d7Kdi70AEjn/3ApPzpRdkJ2/aGFhRxP1x66NWKRN/ZnOjyi0utRw==}
+  '@askbenny/convai-widget-core@file:vendor/askbenny-convai-widget-core-1.4.14.tgz':
+    resolution: {integrity: sha512-PisOmkHcBiHbl2BwVKnurfYLBAlbfUZHCzMHnUwBRoAL08+AGiFFbtEfO8QPZBfPp31sOR1kBgPF2qY9ZMNYPQ==, tarball: file:vendor/askbenny-convai-widget-core-1.4.14.tgz}
+    version: 1.4.14
 
   '@bufbuild/protobuf@1.10.1':
     resolution: {integrity: sha512-wJ8ReQbHxsAfXhrf9ixl0aYbZorRuOWpBNzm8pL8ftmSxQx/wnJD5Eg861NwJU/czy2VXFIebCeZnZrI9rktIQ==}
@@ -667,6 +671,11 @@ packages:
   flatted@3.3.3:
     resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -1016,6 +1025,16 @@ packages:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
 
+  playwright-core@1.57.0:
+    resolution: {integrity: sha512-agTcKlMw/mjBWOnD6kFZttAAGHgi/Nw0CZ2o6JqWSbMlI219lAFLZZCyqByTsvVAJq5XA5H8cA6PrvBRpBWEuQ==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.57.0:
+    resolution: {integrity: sha512-ilYQj1s8sr2ppEJ2YVadYBN0Mb3mdo9J0wQ+UuDhzYqURwSoW4n1Xs5vs7ORwgDGmyEh33tRMeS8KhdkMoLXQw==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
@@ -1276,7 +1295,7 @@ packages:
 
 snapshots:
 
-  '@askbenny/convai-widget-core@1.4.13(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)':
+  '@askbenny/convai-widget-core@file:vendor/askbenny-convai-widget-core-1.4.14.tgz(@types/dom-mediacapture-record@1.0.22)(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(unified@11.0.5)':
     dependencies:
       '@ctrl/tinycolor': 4.2.0
       '@elevenlabs/client': 1.1.1(@types/dom-mediacapture-record@1.0.22)
@@ -1863,6 +1882,9 @@ snapshots:
       keyv: 4.5.4
 
   flatted@3.3.3: {}
+
+  fsevents@2.3.2:
+    optional: true
 
   fsevents@2.3.3:
     optional: true
@@ -2470,6 +2492,14 @@ snapshots:
   picocolors@1.1.1: {}
 
   picomatch@4.0.3: {}
+
+  playwright-core@1.57.0: {}
+
+  playwright@1.57.0:
+    dependencies:
+      playwright-core: 1.57.0
+    optionalDependencies:
+      fsevents: 2.3.2
 
   postcss@8.5.6:
     dependencies:
