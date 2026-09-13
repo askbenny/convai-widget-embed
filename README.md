@@ -75,3 +75,15 @@ Part of the [convai-widget-embed](https://github.com/askbenny/convai-widget-embe
 ## License
 
 MIT © ElevenLabs
+
+## 1.4.14 validation
+
+This patch keeps the existing `dist/index.js` classic-script entrypoint and
+`askbenny-convai` element. It pins `@askbenny/convai-widget-core` to npm version
+`1.4.14`, with the SDK still locked at `1.1.1` and AskBenny session acquisition
+preserved.
+
+Run `pnpm check-types`, `pnpm lint:es`, `pnpm build`, and `pnpm test`.
+Browser checks use Playwright Chromium (`pnpm exec playwright install chromium`);
+`PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` can select an installed Chromium browser.
+The publish workflow requires these checks to pass before releasing the package.
