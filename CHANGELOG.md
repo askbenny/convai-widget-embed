@@ -1,5 +1,9 @@
 # @askbenny/convai-widget-embed
 
+## 1.4.15
+
+- Bundle core 1.4.15: the widget stays visible on agents that require authentication. A refused unsigned widget-config request is retried once with the conversation signature of a managed Ask Benny session, so organizations with a live widget can turn authentication on.
+
 ## 1.4.14
 
 - Bundle core transcript, greeting, IME input, and host-page dropdown fixes while preserving managed sessions and SDK 1.1.1.
