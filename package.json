@@ -15,7 +15,7 @@
     "test": "node --test scripts/*.test.mjs"
   },
   "keywords": [],
-  "author": "ElevenLabs",
+  "author": "Askbenny",
   "license": "MIT",
   "devDependencies": {
     "@askbenny/convai-widget-core": "1.4.16",
