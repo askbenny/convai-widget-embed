@@ -1,5 +1,9 @@
 # @askbenny/convai-widget-embed
 
+## 1.4.16
+
+- Bundle core 1.4.16: a new default "glass" orb, a lit glass sphere that reacts to the conversation's audio and renders from the configured orb colors without loading a noise texture from ElevenLabs' CDN. Also fixes an orb render loop leak on color changes.
+
 ## 1.4.15
 
 - Bundle core 1.4.15: the widget stays visible on agents that require authentication. A refused unsigned widget-config request is retried once with the conversation signature of a managed Ask Benny session, so organizations with a live widget can turn authentication on.
