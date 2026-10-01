@@ -1,5 +1,9 @@
 # @askbenny/convai-widget-embed
 
+## 1.4.17
+
+- Bundle core 1.4.17: orb shaders use only defined `smoothstep` edges, so the glass orb's highlights render consistently across GPUs; the orb pauses while off screen or hidden; and it polls conversation volume only while a call is connected.
+
 ## 1.4.16
 
 - Bundle core 1.4.16: a new default "glass" orb, a lit glass sphere that reacts to the conversation's audio and renders from the configured orb colors without loading a noise texture from ElevenLabs' CDN. Also fixes an orb render loop leak on color changes.
