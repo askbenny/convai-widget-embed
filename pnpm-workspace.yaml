@@ -1,2 +1,7 @@
 ignoredBuiltDependencies:
   - esbuild
+
+overrides:
+  # The bundled Preact (through @askbenny/convai-widget-core 1.4.17) must be at
+  # least 10.28.2 for GHSA-36hm-qxxp-pg3m (JSON VNode injection).
+  "preact@<10.28.2": "^10.29.8"

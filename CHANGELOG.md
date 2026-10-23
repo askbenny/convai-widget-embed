@@ -1,5 +1,10 @@
 # @askbenny/convai-widget-embed
 
+## 1.4.18
+
+- Bundle Preact 10.29.8 (was 10.28.0) for GHSA-36hm-qxxp-pg3m, a JSON VNode injection issue. No widget behavior changes.
+- Releases are published through npm trusted publishing with signed provenance.
+
 ## 1.4.17
 
 - Bundle core 1.4.17: orb shaders use only defined `smoothstep` edges, so the glass orb's highlights render consistently across GPUs; the orb pauses while off screen or hidden; and it polls conversation volume only while a call is connected.
