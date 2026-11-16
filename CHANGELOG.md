@@ -1,5 +1,9 @@
 # @askbenny/convai-widget-embed
 
+## 1.5.1
+
+- Bundle core 1.5.1: the end-of-chat confirmation keeps keyboard focus on its buttons and gives it back when it closes, and unknown rich content names show the fallback instead of breaking the transcript.
+
 ## 1.5.0
 
 - Bundle core 1.5.0, which brings the widget up to date with the ElevenLabs widget (client SDK 1.36.1): file upload and attachments, rich content such as carousels and quick replies, an optional end confirmation, a full-page layout, opening fullscreen on phones, typing indicators, and opt-in persistent text sessions. Ask Benny's managed sessions, branding, orbs and privacy choices are unchanged; the visitor id is a random id, never a device fingerprint.
