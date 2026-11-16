@@ -1,5 +1,11 @@
 # @askbenny/convai-widget-embed
 
+## 1.5.0
+
+- Bundle core 1.5.0, which brings the widget up to date with the ElevenLabs widget (client SDK 1.36.1): file upload and attachments, rich content such as carousels and quick replies, an optional end confirmation, a full-page layout, opening fullscreen on phones, typing indicators, and opt-in persistent text sessions. Ask Benny's managed sessions, branding, orbs and privacy choices are unchanged; the visitor id is a random id, never a device fingerprint.
+- Text chats end after 3 minutes without a message or keystroke, so a chat the visitor left is no longer counted up to the agent's maximum duration.
+- The bundle grows from 1.36 MB to 1.66 MB (416 KB to 504 KB gzipped).
+
 ## 1.4.18
 
 - Bundle Preact 10.29.8 (was 10.28.0) for GHSA-36hm-qxxp-pg3m, a JSON VNode injection issue. No widget behavior changes.

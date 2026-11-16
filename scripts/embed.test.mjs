@@ -16,12 +16,12 @@ after(async () => browser?.close());
 
 test("bundles the reviewed core without changing the SDK baseline", () => {
   const core = require("@askbenny/convai-widget-core/package.json");
-  assert.equal(core.version, "1.4.17");
+  assert.equal(core.version, "1.5.0");
   assert.equal(core.scripts.postinstall, undefined);
   const lock = readFileSync(new URL("../pnpm-lock.yaml", import.meta.url), "utf8");
   const versions = [...lock.matchAll(/@elevenlabs\/client@([^':\s]+)/g)].map((match) => match[1]);
   assert.ok(versions.length > 0);
-  assert.ok(versions.every((version) => version === "1.1.1" || version.startsWith("1.1.1(")));
+  assert.ok(versions.every((version) => version === "1.36.1" || version.startsWith("1.36.1(")));
 });
 
 for (const lockedHost of [false, true]) {
