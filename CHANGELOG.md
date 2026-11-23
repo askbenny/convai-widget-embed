@@ -1,5 +1,10 @@
 # @askbenny/convai-widget-embed
 
+## 1.5.2
+
+- Bundle core 1.5.2: a website assistant set to "Chat only" in Ask Benny opens with the chat button alone. It used to also show the call button, with a phone icon, which opened a text chat.
+- The widget remembers that setting per agent in the browser's local storage (`askbenny_convai_text_only:<environment>:<agent id>`, `1` or `0`, nothing about the visitor), so the right launcher appears at once on later page loads. A first visit waits for it for at most 2 seconds. No extra request is made.
+
 ## 1.5.1
 
 - Bundle core 1.5.1: the end-of-chat confirmation keeps keyboard focus on its buttons and gives it back when it closes, and unknown rich content names show the fallback instead of breaking the transcript.
